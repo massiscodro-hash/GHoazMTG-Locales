@@ -67,7 +67,7 @@ Future<void> main() async {
             'image_url': card['image_uris']?['normal'] ?? card['image_uris']?['large'] ?? ''
           };
           if (card['card_faces'] != null && (card['card_faces'] as List).isNotEmpty) {
-            locData['name'] = card['card_faces'][0]['name'] ?? card['name'];
+            locData['name'] = card['card_faces'][0]['printed_name'] ?? card['card_faces'][0]['name'] ?? card['printed_name'] ?? card['name'];
             locData['printed_text'] = card['card_faces'][0]['printed_text'] ?? '';
             locData['image_url'] = card['card_faces'][0]['image_uris']?['normal'] ?? locData['image_url'];
           }
@@ -96,4 +96,5 @@ Future<void> main() async {
   
   print('Done! Compressed size: ${gzBytes.length / 1024 / 1024} MB');
 }
+
 
