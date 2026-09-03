@@ -60,8 +60,8 @@ Future<void> main() async {
           final locData = {
             'oracle_id': oracleId,
             'lang': lang,
-            'name': card['name'],
-            'type_line': card['type_line'] ?? '',
+            'name': card['printed_name'] ?? card['name'],
+            'type_line': card['printed_type_line'] ?? card['type_line'] ?? '',
             'printed_text': card['printed_text'] ?? '',
             'flavor_text': card['flavor_text'] ?? '',
             'image_url': card['image_uris']?['normal'] ?? card['image_uris']?['large'] ?? ''
@@ -96,3 +96,4 @@ Future<void> main() async {
   
   print('Done! Compressed size: ${gzBytes.length / 1024 / 1024} MB');
 }
+
