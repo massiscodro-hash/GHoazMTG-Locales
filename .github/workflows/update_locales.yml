@@ -1,0 +1,36 @@
+﻿name: Update Localized Cards Database
+
+on:
+  schedule:
+    # Run automatically every day at 4:00 AM UTC
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+    # Allow running manually from the Actions tab
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Run Extraction Script
+        run: dart scripts/generate_locales.dart
+
+      - name: Create or Update Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: latest-locales
+          name: Latest Localized Cards Database
+          files: locales.json.gz
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
