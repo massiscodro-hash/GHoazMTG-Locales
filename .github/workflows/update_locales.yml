@@ -1,4 +1,4 @@
-﻿name: Update Localized Cards Database
+name: Update Localized Cards Database
 
 on:
   schedule:
@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Dart
         uses: dart-lang/setup-dart@v1
@@ -26,7 +26,7 @@ jobs:
         run: dart scripts/generate_locales.dart
 
       - name: Create or Update Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: latest-locales
           name: Latest Localized Cards Database
